@@ -1,44 +1,24 @@
-// import { React, useState } from 'react'
-// import data from "./ListData.json"
+import { Link } from 'react-router-dom';
 
-const data: Array<{id: number, text: string}> = [{
-    "id": 1,
-    "text": "Devpulse"
-}, {
-    "id": 2,
-    "text": "Linklinks"
-}, {
-    "id": 3,
-    "text": "Centizu"
-}, {
-    "id": 4,
-    "text": "Dynabox"
-}, {
-    "id": 5,
-    "text": "Avaveo"
-}, {
-    "id": 6,
-    "text": "Demivee"
-}, {
-    "id": 7,
-    "text": "Jayo"
-}, {
-    "id": 8,
-    "text": "Blognation"
-}, {
-    "id": 9,
-    "text": "Podcat"
-}, {
-    "id": 10,
-    "text": "Layo"
-}] 
-
-export const List = () => {
-    return (
-        <ul>
-            {data.map((item) => (
-                <li key={item.id}>{item.text}</li>
-            ))}
-        </ul>
-    )
+export interface Person {
+  id: string;
+  firstName: string;
+  lastName: string;
 }
+export interface ListProps {
+  data: Person[];
+}
+
+export const List = (props: ListProps) => {
+  return (
+    <ul>
+      {props.data.map((person) => (
+        <li key={person.id}>
+          <Link to="/personDetails">
+            {person.firstName}/ {person.lastName}
+          </Link>
+        </li>
+      ))}
+    </ul>
+  );
+};

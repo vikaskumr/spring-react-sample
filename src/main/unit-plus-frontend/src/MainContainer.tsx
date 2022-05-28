@@ -1,10 +1,10 @@
 import { FC } from 'react';
 import { useState } from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
 import logo from './logo.svg';
 import './App.css';
 import { SearchBar } from './components/SearchBar';
 import { Announcer } from './components/Announcer';
+import { List } from './components/List';
 import { Box } from '@mui/material';
 
 export interface Person {
@@ -26,7 +26,7 @@ const filterpersons = (persons: Person[], query: string): Person[] => {
   }
 
   return persons.filter((person: Person) => {
-    const personFirstName = person.firstName.toLowerCase();
+    const personFirstName: string = person.firstName.toLowerCase();
     return personFirstName.includes(query.toLocaleLowerCase());
   });
 };
@@ -39,14 +39,16 @@ export const MainContainer: FC<MainContainerProps> = ({ readonly = false }: Main
   const { search } = window.location;
   const query = new URLSearchParams(search).get('s');
   const [searchQuery, setSearchQuery] = useState<string>(query || '');
-  const filteredpersons = filterpersons(persons, searchQuery);
+  const filteredpersons: Person[] = filterpersons(persons, searchQuery);
   const [visible, setVisible] = useState<boolean>(false);
 
   return (
-    <Router>
+    <Box>
       <div className="App">
         <Announcer message={`${filteredpersons.length} persons`} />
+
         <img src={logo} className="App-logo" alt="logo" />
+
         <SearchBar
           searchQuery={searchQuery}
           setSearchQuery={setSearchQuery}
@@ -54,15 +56,9 @@ export const MainContainer: FC<MainContainerProps> = ({ readonly = false }: Main
         />
 
         {searchQuery && visible && filteredpersons.length > 0 ? (
-          <ul>
-            {filteredpersons.map((person) => (
-              <li key={person.id}>
-                {person.firstName}/ {person.lastName}
-              </li>
-            ))}
-          </ul>
+          <List data={filteredpersons}></List>
         ) : null}
       </div>
-    </Router>
+    </Box>
   );
 };
