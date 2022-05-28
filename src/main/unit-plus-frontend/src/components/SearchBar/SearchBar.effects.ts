@@ -1,40 +1,43 @@
-import { useAsyncDebounce } from "react-table";
-import { useForm, FieldValues } from "react-hook-form";
-import { SearchProps } from "./SearchBar";
-import { useState } from "react";
+import { useAsyncDebounce } from 'react-table';
+import { useForm, FieldValues } from 'react-hook-form';
+import { SearchProps } from './SearchBar';
 
-export const useSearchEffects = ({ debounceTime = 300 }: SearchProps) => {
-  const [filter, setFilter] = useState("");
-
-  const onFilterChange = useAsyncDebounce((value: string) => {
-    setFilter(value || "");
+export const useSearchEffects = ({
+  searchQuery,
+  setSearchQuery,
+  setVisible,
+  debounceTime = 300
+}: SearchProps) => {
+  const onSearchFilterChange = useAsyncDebounce((value: string) => {
+    setSearchQuery(value || '');
   }, debounceTime);
 
   const { register, reset, watch } = useForm<FieldValues>({
-    mode: "onChange",
-    defaultValues: { search: filter },
+    mode: 'onChange',
+    defaultValues: { search: searchQuery }
   });
 
   const field = {
-    name: "search",
+    name: 'search',
     inputProps: {
-      placeholder: "Search",
-    },
+      placeholder: 'Search'
+    }
   };
 
   const inputProps = register(field.name);
   const value = watch(field.name);
 
   const handleReset = () => {
-    onFilterChange("");
-    reset({ search: "" });
+    onSearchFilterChange('');
+    setVisible(false);
+    reset({ search: '' });
   };
 
   return {
     field,
     handleReset,
-    onFilterChange,
+    onFilterChange: onSearchFilterChange,
     inputProps,
-    value,
+    value
   };
 };

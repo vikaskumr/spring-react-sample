@@ -1,29 +1,33 @@
-import { FC } from "react";
-import { useState } from "react";
-import { BrowserRouter as Router } from "react-router-dom";
-import logo from "./logo.svg";
-import "./App.css";
-import { SearchBar } from "./components/SearchBar";
-import { Announcer } from "./components/Announcer";
+import { FC } from 'react';
+import { useState } from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
+import logo from './logo.svg';
+import './App.css';
+import { SearchBar } from './components/SearchBar';
+import { Announcer } from './components/Announcer';
+import { Box } from '@mui/material';
 
-const posts: Array<{ id: string; name: string }> = [
-  { id: "1", name: "This first post is about React" },
-  { id: "2", name: "This next post is about Preact" },
-  { id: "3", name: "We have yet another React post!" },
-  { id: "4", name: "This is the fourth and final post" },
+export interface Person {
+  id: string;
+  firstName: string;
+  lastName: string;
+}
+
+const persons: Person[] = [
+  { id: '1', firstName: 'Vikas', lastName: 'Kumar' },
+  { id: '2', firstName: 'Vinay', lastName: 'Kumar' },
+  { id: '3', firstName: 'Komal', lastName: 'Kumar' },
+  { id: '4', firstName: 'Robin', lastName: 'Kumar' }
 ];
 
-const filterPosts = (
-  posts: Array<{ id: string; name: string }>,
-  query: string
-) => {
+const filterpersons = (persons: Person[], query: string): Person[] => {
   if (!query) {
-    return posts;
+    return persons;
   }
 
-  return posts.filter((post: { id: string; name: string }) => {
-    const postName = post.name.toLowerCase();
-    return postName.includes(query);
+  return persons.filter((person: Person) => {
+    const personFirstName = person.firstName.toLowerCase();
+    return personFirstName.includes(query.toLocaleLowerCase());
   });
 };
 
@@ -31,24 +35,30 @@ export interface MainContainerProps {
   readonly?: boolean;
 }
 
-export const MainContainer: FC<MainContainerProps> = ({
-  readonly = false,
-}: MainContainerProps) => {
+export const MainContainer: FC<MainContainerProps> = ({ readonly = false }: MainContainerProps) => {
   const { search } = window.location;
-  const query = new URLSearchParams(search).get("s");
-  const [searchQuery, setSearchQuery] = useState(query || "");
-  const filteredPosts = filterPosts(posts, searchQuery);
+  const query = new URLSearchParams(search).get('s');
+  const [searchQuery, setSearchQuery] = useState<string>(query || '');
+  const filteredpersons = filterpersons(persons, searchQuery);
+  const [visible, setVisible] = useState<boolean>(false);
 
   return (
     <Router>
       <div className="App">
-        <Announcer message={`${filteredPosts.length} posts`} />
+        <Announcer message={`${filteredpersons.length} persons`} />
         <img src={logo} className="App-logo" alt="logo" />
-        <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
-        {searchQuery ? (
+        <SearchBar
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+          setVisible={setVisible}
+        />
+
+        {searchQuery && visible && filteredpersons.length > 0 ? (
           <ul>
-            {filteredPosts.map((post) => (
-              <li key={post.id}>{post.name}</li>
+            {filteredpersons.map((person) => (
+              <li key={person.id}>
+                {person.firstName}/ {person.lastName}
+              </li>
             ))}
           </ul>
         ) : null}
