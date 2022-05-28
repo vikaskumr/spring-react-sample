@@ -1,7 +1,9 @@
 import { Box } from '@mui/material';
+import { useParams } from 'react-router-dom';
 
 export const PersonDetails = () => {
-  console.log('PersonDetails component');
+  const { id } = useParams();
+
   return (
     <Box>
       <p>First Name: Vikas</p>

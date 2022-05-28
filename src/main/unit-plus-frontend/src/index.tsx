@@ -12,7 +12,7 @@ root.render(
     <Router>
       <Routes>
         <Route path="/" element={<App />} />
-        <Route path="/personDetails" element={<PersonDetails />} />
+        <Route path="/personDetails/:id" element={<PersonDetails />} />
       </Routes>
     </Router>
   </React.StrictMode>
