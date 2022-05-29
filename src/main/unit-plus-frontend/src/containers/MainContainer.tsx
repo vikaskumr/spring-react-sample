@@ -1,11 +1,9 @@
 import { FC } from 'react';
 import { useState } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import { SearchBar } from './components/SearchBar';
-import { Announcer } from './components/Announcer';
-import { List } from './components/List';
-import { Box } from '@mui/material';
+import logo from '../logo.svg';
+import '../App.css';
+import { SearchBar } from '../components/SearchBar';
+import { List } from '../components/List';
 
 export interface Person {
   id: string;
@@ -43,22 +41,18 @@ export const MainContainer: FC<MainContainerProps> = ({ readonly = false }: Main
   const [visible, setVisible] = useState<boolean>(false);
 
   return (
-    <Box>
-      <div className="App">
-        <Announcer message={`${filteredpersons.length} persons`} />
+    <div className="App">
+      <img src={logo} className="App-logo" alt="logo" />
 
-        <img src={logo} className="App-logo" alt="logo" />
+      <SearchBar
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+        setVisible={setVisible}
+      />
 
-        <SearchBar
-          searchQuery={searchQuery}
-          setSearchQuery={setSearchQuery}
-          setVisible={setVisible}
-        />
-
-        {searchQuery && visible && filteredpersons.length > 0 ? (
-          <List data={filteredpersons}></List>
-        ) : null}
-      </div>
-    </Box>
+      {searchQuery && visible && filteredpersons.length > 0 ? (
+        <List data={filteredpersons}></List>
+      ) : null}
+    </div>
   );
 };
