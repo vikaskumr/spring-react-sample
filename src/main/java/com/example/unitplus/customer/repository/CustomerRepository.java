@@ -1,7 +1,10 @@
 package com.example.unitplus.customer.repository;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
+import com.example.unitplus.customer.Customer;
 import com.example.unitplus.customer.dto.CustomerDto;
 import com.example.unitplus.customer.storage.CustomerDatabase;
 
@@ -13,7 +16,7 @@ import org.springframework.stereotype.Repository;
 // of employees
 public class CustomerRepository {
 
-        private static CustomerDatabase list = new CustomerDatabase();
+        private static Customer list = new Customer();
 
         // This static block is executed
         // before executing the main
@@ -36,7 +39,7 @@ public class CustomerRepository {
         }
 
         // Method to return the list
-        public CustomerDatabase getAllCustomers() {
+        public Customer getAllCustomers() {
 
                 return list;
         }

@@ -3,21 +3,21 @@ package com.example.unitplus.customer;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.unitplus.customer.dto.CustomerDto;
+
 // Class to store the list of
 // all the Customers in an
 // Array List
 public class Customer {
 
-    private List<Customer> customerList;
+    private List<CustomerDto> customerList;
 
     // Method to return the list
     // of Customers
-    public List<Customer> getCustomerList() {
+    public List<CustomerDto> getCustomerList() {
 
         if (customerList == null) {
-
             customerList = new ArrayList<>();
-
         }
 
         return customerList;
@@ -25,7 +25,7 @@ public class Customer {
     }
 
     public void setCustomerList(
-            List<Customer> CustomerList) {
+            List<CustomerDto> CustomerList) {
         this.customerList = CustomerList;
     }
 }
