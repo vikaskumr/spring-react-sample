@@ -1,12 +1,9 @@
 package com.example.unitplus.customer.repository;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 
 import com.example.unitplus.customer.Customer;
 import com.example.unitplus.customer.dto.CustomerDto;
-import com.example.unitplus.customer.storage.CustomerDatabase;
 
 import org.springframework.stereotype.Repository;
 
@@ -40,8 +37,12 @@ public class CustomerRepository {
 
         // Method to return the list
         public Customer getAllCustomers() {
-
                 return list;
+        }
+
+        public CustomerDto getCustomerDetailsById(Integer portfolioId) {
+                return list.getCustomerList().stream().filter(customer -> customer.getPortfolioId() == portfolioId)
+                                .findAny().orElse(null);
         }
 
         // Method to add an employee
