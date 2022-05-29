@@ -9,7 +9,7 @@ export const List = (props: ListProps) => {
     <ul>
       {props.data.map((customer) => (
         <li key={customer.portfolioId}>
-          <Link to={`/personDetails/${customer.portfolioId}`}>
+          <Link to={`/customerDetails/${customer.portfolioId}`}>
             {customer.firstName}/ {customer.lastName}
           </Link>
         </li>

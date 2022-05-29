@@ -19,7 +19,6 @@ export const useMainContainerEffects = (searchQuery: string) => {
 
   useEffect(() => {
     const url = 'http://localhost:8080/customers/';
-
     fetchData(url);
   }, [setCustomers]);
 

@@ -3,6 +3,7 @@ export interface Customer {
   firstName: string;
   lastName: string;
   portfolioId?: number;
+  emailAddress: string;
   portfolioValuation?: number;
 }
 
