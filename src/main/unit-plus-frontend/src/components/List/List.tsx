@@ -1,21 +1,16 @@
 import { Link } from 'react-router-dom';
-
-export interface Person {
-  id: string;
-  firstName: string;
-  lastName: string;
-}
+import { Customer } from '../../containers/dto/customer-response.dto';
 export interface ListProps {
-  data: Person[];
+  data: Customer[];
 }
 
 export const List = (props: ListProps) => {
   return (
     <ul>
-      {props.data.map((person) => (
-        <li key={person.id}>
-          <Link to={`/personDetails/${person.id}`}>
-            {person.firstName}/ {person.lastName}
+      {props.data.map((customer) => (
+        <li key={customer.portfolioId}>
+          <Link to={`/personDetails/${customer.portfolioId}`}>
+            {customer.firstName}/ {customer.lastName}
           </Link>
         </li>
       ))}

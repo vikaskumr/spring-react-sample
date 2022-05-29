@@ -1,13 +1,10 @@
 package com.example.unitplus.customer.controller;
 
-import java.net.URI;
-import java.util.List;
-import java.util.stream.Stream;
-
 import com.example.unitplus.customer.Customer;
 import com.example.unitplus.customer.dto.CustomerDto;
 import com.example.unitplus.customer.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,6 +25,7 @@ public class CustomerController {
     // Implementing a GET method
     // to get the list of all
     // the cutomers
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping(path = "/", produces = "application/json")
 
     public Customer getCustomers() {
@@ -38,6 +36,7 @@ public class CustomerController {
 
     // Implementing a GET method
     // to get the details of a particular customer
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping(path = "/{portfolioId}", produces = "application/json")
 
     public CustomerDto getCustomerDetails(@PathVariable("portfolioId") Integer portfolioId) {
