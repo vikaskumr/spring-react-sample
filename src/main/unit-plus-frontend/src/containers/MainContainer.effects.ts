@@ -9,7 +9,6 @@ export const useMainContainerEffects = (searchQuery: string) => {
     try {
       const response = await fetch(url);
       const customers: CustomerList = await response.json();
-      console.log(customers);
       setCustomers(customers.customerList);
     } catch (error) {
       console.log('error', error);

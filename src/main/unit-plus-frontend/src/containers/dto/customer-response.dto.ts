@@ -2,9 +2,9 @@ export interface Customer {
   id?: string;
   firstName: string;
   lastName: string;
-  portfolioId?: number;
+  portfolioId: number;
   emailAddress: string;
-  portfolioValuation?: number;
+  portfolioValuation: number;
 }
 
 export interface CustomerList {

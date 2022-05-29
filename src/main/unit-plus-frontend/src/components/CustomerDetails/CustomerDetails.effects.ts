@@ -9,7 +9,6 @@ export const useCustomerDetailsEffects = (portfolioId: number) => {
     try {
       const response = await fetch(url);
       const customer: Customer = await response.json();
-      console.log(customer);
       setCustomerDeatils(customer);
     } catch (error) {
       console.log('error', error);
